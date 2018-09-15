@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from control import views
 
 urlpatterns = [
+    # url('', views.index.as_view(), name="home"),
+    # path('comida', views.comida.as_view(), name="comida"),
+    # path('confirmar', views.confirmacion.as_view(), name="confirmacion"),
+    # path('confirmarComida', views.confirmacionComida.as_view(), name="confirmacionComida"),
+    # path('reporte', views.reporte.as_view(), name="reporte"),
+    # path('export/csv/', views.export_users_csv.as_view(), name="export_users_csv"),
+    
+    # path('accounts/', include('registration.backends.default.urls')),
+    # path('admin/', admin.site.urls),
     url(r'^admin/', admin.site.urls),
 ]

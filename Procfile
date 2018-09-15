@@ -1,0 +1,1 @@
+web: gunicorn lobowebapp.wsgi --log-file -
