@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+{% endblock css %}
+  
+{% block contenido %}
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Reporte Horas <small>Selección de Fecha</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        
+        <form role="form" action="" method="POST">
+        {% csrf_token %}
+            
+            <div class="row">
+                <div class='col-lg-6'>
+                    <div class="form-group">
+                        <label for="dtp_input1" class="control-label">Selecciona Fecha Inicio</label>
+                        <div class="input-group date form_datetime"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                            <input class="form-control" size="16" type="text" value="" readonly name="fechahora">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                    </div>
+                </div>
+                
+                <div class='col-lg-6'>
+                    <div class="form-group">
+                        <label for="dtp_input1" class="control-label">Selecciona Fecha Fin</label>
+                        <div class="input-group date form_datetime"  data-date-format="dd/mm/yyyy HH:ii" data-link-field="dtp_input1">
+                            <input class="form-control" size="16" type="text" value="" readonly name="fechahora">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class='col-lg-6'>
+                    <a class="btn btn-primary" href="{% url 'export_users_csv' %}">Reporte</a>
+                    <button type="reset" class="btn btn-warning">Limpiar</button>
+                    <a class="btn btn-danger" href="{% url 'home' %}">Cancelar</a>
+                </div>
+            </div>
+        <!-- /.row -->
+        </form>
+
+    </div>
+        
+        
+        
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+{% endblock contenido %}
+
+{% block js %}
+
+<script src="{% static 'vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js' %}"></script>
+
+{% endblock js %}
+
+{% block jsCode %}
+                    
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+
+
+<script type="text/javascript">
+(function($) {
+  'use strict';
+
+  var $accountDelete = $('#delete-account'),
+    $accountDeleteDialog = $('#confirm-delete');
+
+  $accountDelete.on('click', function() {
+    $accountDeleteDialog[0].show();
+  });
+
+  $('#cancel').on('click', function() {
+    $accountDeleteDialog[0].close();
+  });
+
+})(jQuery);
+</script>
+
+{% endblock jsCode %}

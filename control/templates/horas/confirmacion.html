@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+  
+<!-- Cuerpo de la página. Contenido -->
+{% block contenido %}
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+    
+    {% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+    
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Confirmar
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+        <div class='col-lg-12'>
+            <div class="form-group">
+                {% if accion == 'entrada' %}
+                <label>Se registrará la entrada de: {{ persona.alias }}</label>
+                {% elif accion == 'salida' %}
+                <label>Se registrará la salida de: {{ persona.alias }}</label>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+        
+        <form role="form" action="" method="POST">
+        {% csrf_token %}
+            
+            <div class="row">
+            <div class='col-lg-6'>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <a class="btn btn-warning" href="{% url 'home' %}">Cancelar</a>
+                </div>
+            </div>        
+            </div>
+        <!-- /.row -->
+        </form>
+
+    </div>
+        
+        
+        
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+{% endblock contenido %}

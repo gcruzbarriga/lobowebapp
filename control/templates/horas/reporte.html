@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+{% endblock css %}
+  
+{% block contenido %}
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Reporte Horas <small>Selección de Fecha</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        
+        <form role="form" action="" method="POST">
+        {% csrf_token %}
+            
+            <div class="row">
+                <div class='col-lg-6'>
+                    <div class="form-group">
+                        <label for="dtp_input1" class="control-label">Selecciona Fecha Inicio</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" type="text" value="" readonly name="fechahoraini">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                    </div>
+                </div>
+                
+                <div class='col-lg-6'>
+                    <div class="form-group">
+                        <label for="dtp_input2" class="control-label">Selecciona Fecha Fin</label>
+                        <div class="input-group date form_date2" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" type="text" value="" readonly name="fechahorafin">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                <div class='col-lg-6'>
+                    <button type="submit" class="btn btn-primary">Reporte</button>
+                    <button type="reset" class="btn btn-warning">Limpiar</button>
+                    <a class="btn btn-danger" href="{% url 'home' %}">Cancelar</a>
+                </div>
+            </div>
+        <!-- /.row -->
+        </form>
+
+    </div>
+        
+        
+        
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+{% endblock contenido %}
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'datepicker/jquery/jquery-1.8.3.min.js' %}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'datepicker/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js' %}" charset="UTF-8"></script>
+
+{% endblock js %}
+
+{% block jsCode %}
+
+
+<script type="text/javascript">
+    $('.form_date').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+    
+	$('.form_date2').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+    
+    
+</script>
+
+
+{% endblock jsCode %}
