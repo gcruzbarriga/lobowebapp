@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # DEBUG = True
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['immense-brushlands-66213.herokuapp.com']
+ALLOWED_HOSTS = ['refalobo.herokuapp.com']
 
 
 # Application definition
