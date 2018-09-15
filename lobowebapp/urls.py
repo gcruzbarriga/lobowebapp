@@ -18,7 +18,7 @@ from django.contrib import admin
 from control import views
 
 urlpatterns = [
-    # url('', views.index.as_view(), name="home"),
+    url('', views.index, name="home"),
     # path('comida', views.comida.as_view(), name="comida"),
     # path('confirmar', views.confirmacion.as_view(), name="confirmacion"),
     # path('confirmarComida', views.confirmacionComida.as_view(), name="confirmacionComida"),
