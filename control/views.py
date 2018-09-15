@@ -210,7 +210,7 @@ def export_users_csv(request):
     response['Content-Disposition'] = 'attachment; filename="Reporte_Horas.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['NOMBRE','APELLIDO','FECHA','HORA ENTRADA','HORA SALIDA','INICIO COMIDA','FIN COMIDA'])
+    writer.writerow(['ID','NOMBRE','APELLIDO','FECHA','HORA ENTRADA','HORA SALIDA','INICIO COMIDA','FIN COMIDA'])
     
     registros = modelos.ControlHoras.objects.values_list('pk','trabajador__nombre','trabajador__apellido_pat','fecha','hora_entrada','hora_salida','hora_comidai','hora_comidaf').filter(
             fecha__range = (request.session['fechaIni'],request.session['fechaFin']))
