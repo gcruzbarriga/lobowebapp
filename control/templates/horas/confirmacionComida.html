@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Confirmar Comida -  <b> {{ persona.alias }} </b>
+                    Confirmar Comida
                 </h1>
             </div>
         </div>
@@ -34,13 +34,17 @@
         <div class='col-lg-12'>
             <div class="form-group">
                 {% if accion == 'ini' %}
-                <label>Inicio de hora de comida de: {{ persona.alias }}</label>
+                <h3>Inicio de hora de comida de: <b>{{ persona.alias }}</b></h3>
+                <!-- <label>Inicio de hora de comida de: {{ persona.alias }}</label> -->
                 {% elif accion == 'fin' %}
-                <label>Fin de hora de comida de: {{ persona.alias }}</label>
+                <h3>Fin de hora de comida de: <b>{{ persona.alias }}</b></h3>
+                <!-- <label>Fin de hora de comida de: {{ persona.alias }}</label> -->
                 {% elif accion == 'bloqueo' %}
-                <label>{{ persona.alias }} ya salió, no registró fin de comida</label>
+                <h3><b>{{ persona.alias }}</b> ya salió, no registró fin de comida</h3>
+                <!-- <label>{{ persona.alias }} ya salió, no registró fin de comida</label> -->
                 {% elif accion == 'noAsis' %}
-                <label>{{ persona.alias }} no asitió hoy</label>
+                <h3><b>{{ persona.alias }}</b> no asitió hoy</h3>
+                <!-- <label>{{ persona.alias }} no asitió hoy</label> -->
                 {% endif %}
             </div>
         </div>
@@ -51,16 +55,26 @@
             
             <div class="row">
             <div class='col-lg-6'>
+                <!-- <div class="form-group"> -->
+                {% if accion == 'noAsis' %}
                 <div class="form-group">
-                    {% if accion == 'noAsis' %}
                     <a class="btn btn-warning" href="{% url 'comida' %}">Regresar</a>
-                    {% elif accion == 'bloqueo' %}
+                </div>
+                {% elif accion == 'bloqueo' %}
+                <div class="form-group">
                     <a class="btn btn-warning" href="{% url 'comida' %}">Regresar</a>
-                    {% else %}
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label>NIP</label>
+                    <input class="form-control" maxlength="4" name="nip" type="password" autocomplete="off" >
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                     <a class="btn btn-warning" href="{% url 'comida' %}">Cancelar</a>
-                    {% endif %}
                 </div>
+                {% endif %}
+                <!-- </div> -->
             </div>        
             </div>
         <!-- /.row -->

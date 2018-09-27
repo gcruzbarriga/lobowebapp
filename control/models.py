@@ -38,6 +38,7 @@ class Personal(models.Model):
     tel_otro = models.CharField(max_length=13, blank = True)
     email = models.EmailField(max_length=100, blank = True)
     alias = models.CharField(max_length=30)
+    nip = models.CharField(max_length=4, blank = True)
     activo = models.BooleanField(default = True)
     
     

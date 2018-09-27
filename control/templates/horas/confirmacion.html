@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Confirmar - <b> {{ persona.alias }} </b>
+                    Confirmar
                 </h1>
             </div>
         </div>
@@ -34,9 +34,11 @@
         <div class='col-lg-12'>
             <div class="form-group">
                 {% if accion == 'entrada' %}
-                <label>Se registrará la entrada de: {{ persona.alias }}</label>
+                <h3>Se registrará la entrada de: <b>{{ persona.alias }}</b></h3>
+                <!-- <label>Se registrará la entrada de: {{ persona.alias }}</label> -->
                 {% elif accion == 'salida' %}
-                <label>Se registrará la salida de: {{ persona.alias }}</label>
+                <h3>Se registrará la salida de: <b>{{ persona.alias }}</b></h3>
+                <!-- <label>Se registrará la salida de: {{ persona.alias }}</label> -->
                 {% endif %}
             </div>
         </div>
@@ -47,6 +49,10 @@
             
             <div class="row">
             <div class='col-lg-6'>
+                <div class="form-group">
+                    <label>NIP</label>
+                    <input class="form-control" maxlength="4" name="nip" type="password" autocomplete="off" >
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                     <a class="btn btn-warning" href="{% url 'home' %}">Cancelar</a>

@@ -121,26 +121,32 @@ def confirmacion(request):
         if request.session['entrada']:
             form = ControlHorasForm(request.POST)
             if form.is_valid():
-                registro = form.save(commit=False)
-                
-                fechahora = datetime.datetime.now()
-                fecha = fechahora.date()
-                hora_entrada = fechahora.strftime('%H:%M')
-                
-                registro.trabajador = persona
-                registro.fecha = fecha
-                registro.hora_entrada = hora_entrada
-                
-                registro.save()
-                return redirect('home')
+                if request.POST.get("nip","") == persona.nip:
+                    registro = form.save(commit=False)
+                    
+                    fechahora = datetime.datetime.now()
+                    fecha = fechahora.date()
+                    hora_entrada = fechahora.strftime('%H:%M')
+                    
+                    registro.trabajador = persona
+                    registro.fecha = fecha
+                    registro.hora_entrada = hora_entrada
+                    
+                    registro.save()
+                    return redirect('home')
+                else:
+                    messages.warning(request, 'NIP incorrecto')
             else:
                 messages.warning(request, form.errors)
         elif request.session['salida']:
-            registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
-            fechahora = datetime.datetime.now()
-            registro.hora_salida = fechahora.strftime('%H:%M')
-            registro.save()
-            return redirect('home')
+            if request.POST.get("nip","") == persona.nip:
+                registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
+                fechahora = datetime.datetime.now()
+                registro.hora_salida = fechahora.strftime('%H:%M')
+                registro.save()
+                return redirect('home')
+            else:
+                    messages.warning(request, 'NIP incorrecto')
 
     return render(request, "horas/confirmacion.html", {
         'persona': persona,
@@ -161,17 +167,23 @@ def confirmacionComida(request):
     
     if request.method == 'POST':
         if request.session['ini']:
-            registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
-            fechahora = datetime.datetime.now()
-            registro.hora_comidai = fechahora.strftime('%H:%M')
-            registro.save()
-            return redirect('comida')
+            if request.POST.get("nip","") == persona.nip:
+                registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
+                fechahora = datetime.datetime.now()
+                registro.hora_comidai = fechahora.strftime('%H:%M')
+                registro.save()
+                return redirect('comida')
+            else:
+                messages.warning(request, 'NIP incorrecto')
         elif request.session['fin']:
-            registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
-            fechahora = datetime.datetime.now()
-            registro.hora_comidaf = fechahora.strftime('%H:%M')
-            registro.save()
-            return redirect('comida')
+            if request.POST.get("nip","") == persona.nip:
+                registro = modelos.ControlHoras.objects.get(id=request.session['regId'])
+                fechahora = datetime.datetime.now()
+                registro.hora_comidaf = fechahora.strftime('%H:%M')
+                registro.save()
+                return redirect('comida')
+            else:
+                messages.warning(request, 'NIP incorrecto')
 
     return render(request, "horas/confirmacionComida.html", {
         'persona': persona,
