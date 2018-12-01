@@ -16,7 +16,8 @@ def index(request):
     
     listPersonal = []
     
-    equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').order_by('nombre')
+    # equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').order_by('nombre')
+    equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').filter(activo = True).order_by('nombre')
     
     for eqTr in equipoTrabajo:
         horas = modelos.ControlHoras.objects.values('hora_entrada','hora_salida').filter(
@@ -61,7 +62,8 @@ def comida(request):
     
     listPersonal = []
     
-    equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').order_by('nombre')
+    # equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').order_by('nombre')
+    equipoTrabajo = modelos.Personal.objects.values('pk','nombre','apellido_pat','alias').filter(activo = True).order_by('nombre')
     
     for eqTr in equipoTrabajo:
         horas = modelos.ControlHoras.objects.values('hora_comidai','hora_comidaf').filter(
